@@ -5,7 +5,7 @@ const loader = document.getElementById('loader');
 const iframe = document.getElementById('site-frame');
 
 // Set iframe source
-iframe.src = "https://www.google.com";
+iframe.src = "https://www.instagram.com";
 
 // After random delay, hide loader and show iframe
 setTimeout(() => {
