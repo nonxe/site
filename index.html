@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Loader</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="input-box">
+        <input id="siteInput" type="text" placeholder="Enter site URL...">
+        <button onclick="loadSite()">Load Site</button>
+    </div>
+
+    <div id="maintenance" class="hidden">
+        <p class="float-text">Service Under Maintenance</p>
+    </div>
+
+    <iframe id="siteFrame" class="hidden"></iframe>
+
+    <script src="site.js"></script>
+</body>
+</html>
