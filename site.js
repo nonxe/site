@@ -1,36 +1,59 @@
-function loadSite() {
-    const urlInput = document.getElementById("siteInput").value.trim();
-    const iframe = document.getElementById("siteFrame");
-    const maintenance = document.getElementById("maintenance");
+// ⚙️ CONFIGURATION - Replace with your website URL
+const SITE_URL = "https://www.google.com";
 
-    if (!urlInput) {
-        alert("https://www.google.com");
-        return;
-    }
-
-    let url = urlInput;
-
-    // Auto-add https if missing
-    if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        url = "https://" + url;
-    }
-
-    iframe.src = url;
-
-    iframe.classList.remove("hidden");
-    maintenance.classList.add("hidden");
-
-    // Detect if iframe fails
-    iframe.onerror = function () {
-        iframe.classList.add("hidden");
-        maintenance.classList.remove("hidden");
+// Wait for DOM to load
+document.addEventListener('DOMContentLoaded', function() {
+    const loader = document.getElementById('loader');
+    const maintenance = document.getElementById('maintenance');
+    const iframe = document.getElementById('site-frame');
+    
+    // Set iframe source
+    iframe.src = SITE_URL;
+    
+    let iframeLoaded = false;
+    let iframeBlocked = false;
+    
+    // Check if iframe loads successfully
+    iframe.onload = function() {
+        iframeLoaded = true;
+        
+        // Hide loader and show iframe
+        setTimeout(() => {
+            loader.classList.add('hidden');
+            setTimeout(() => {
+                loader.style.display = 'none';
+                iframe.classList.add('active');
+            }, 500);
+        }, 800);
     };
-
-    // Extra timeout fallback (in case site hangs)
+    
+    // Detect if iframe is blocked or fails to load
+    iframe.onerror = function() {
+        iframeBlocked = true;
+        showMaintenance();
+    };
+    
+    // Fallback: If iframe doesn't load within 5 seconds, show maintenance
     setTimeout(() => {
-        if (!iframe.contentWindow || iframe.contentWindow.length === 0) {
-            iframe.classList.add("hidden");
-            maintenance.classList.remove("hidden");
+        if (!iframeLoaded && !iframeBlocked) {
+            // Try to check if iframe content is accessible
+            try {
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                if (!iframeDoc || iframeDoc.readyState !== 'complete') {
+                    showMaintenance();
+                }
+            } catch (e) {
+                // If we can't access iframe (blocked by X-Frame-Options), show maintenance
+                showMaintenance();
+            }
         }
-    }, 4000);
-}
+    }, 5000);
+    
+    function showMaintenance() {
+        loader.classList.add('hidden');
+        setTimeout(() => {
+            loader.style.display = 'none';
+            maintenance.classList.add('active');
+        }, 500);
+    }
+});
