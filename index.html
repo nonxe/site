@@ -3,22 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Loader</title>
+    <title>Loading...</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="input-box">
-        <input id="siteInput" type="text" placeholder="Enter site URL...">
-        <button onclick="loadSite()">Load Site</button>
+    <div id="loader" class="loader-container">
+        <div class="loader">
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+            <div class="loader-ring"></div>
+        </div>
+        <p class="loader-text">Loading...</p>
     </div>
-
-    <div id="maintenance" class="hidden">
-        <p class="float-text">Service Under Maintenance</p>
+    
+    <div id="maintenance" class="maintenance-container">
+        <div class="maintenance-content">
+            <div class="maintenance-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+            </div>
+            <h1 class="maintenance-title">Service Under Maintenance</h1>
+            <p class="maintenance-text">We're working to improve your experience. Please check back soon.</p>
+            <div class="maintenance-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </div>
-
-    <iframe id="siteFrame" class="hidden"></iframe>
-
+    
+    <iframe id="site-frame"></iframe>
+    
     <script src="site.js"></script>
 </body>
 </html>
