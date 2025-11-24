@@ -1,7 +1,14 @@
 // Random loading time: 1 to 3 seconds
 const randomDelay = Math.floor(Math.random() * 3000) + 1000;
 
-// Wait for random delay, then redirect
+const loader = document.getElementById('loader');
+const iframe = document.getElementById('site-frame');
+
+// Set iframe source
+iframe.src = "https://www.google.com";
+
+// After random delay, hide loader and show iframe
 setTimeout(() => {
-    window.location.href = "https://www.google.com";
+    loader.classList.add('hidden');
+    iframe.classList.add('active');
 }, randomDelay);
