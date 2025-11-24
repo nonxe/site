@@ -1,5 +1,5 @@
 // ⚙️ CONFIGURATION - Replace with your website URL
-const SITE_URL = "https://www.google.com";
+const SITE_URL = "https://new-bilal-mini-02994ac5b325.herokuapp.com";
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
